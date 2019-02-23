@@ -10,16 +10,16 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val TAG = "The debugger is saying"
 
-    private val playerX = 1
-    private val playerO = 2
-    private val emptyBlock = 0
+    private var currentPlayer = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,14 +57,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn08.setOnClickListener(this)
     }
 
-    private fun loadXGif(imageView: ImageView) {
+    fun loadXGif(imageView: ImageView) {
 
         Glide.with(this)
             .asGif()
-            .listener(listenerStopGif())
+            //.listener(listenerStopGif())
             .load(R.drawable.x)
             .fitCenter()
-            .into(imageView)
+            .into(object : ImageViewTarget<GifDrawable>(imageView) {
+                override fun setResource(resource: GifDrawable?) {
+                    resource?.setLoopCount(1)
+                    imageView.setImageDrawable(resource)
+                }
+            })
 
     }
 
@@ -77,6 +82,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .fitCenter()
             .into(imageView)
     }
+
     private fun listenerStopGif(): RequestListener<GifDrawable> {
         return object : RequestListener<GifDrawable> {
             override fun onLoadFailed(
@@ -105,20 +111,65 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
-        if (v != null) {
-            when(v.id) {
-               R.id.btn00 -> {
-                   loadXGif(btn00)
-                   btn00.isClickable = false
-                   Log.d(TAG, "click")
-               }
-                R.id.btn01 -> {
-                    loadOGif(btn01)
+        var idBtn = 0
+        var selectedBlock = v as ImageView
+        if (selectedBlock != null) {
+            when (selectedBlock.id) {
+                R.id.btn00 -> {
+                    idBtn = 1
+                    btn01.isClickable = false
+                    Log.d(TAG, "click")
                 }
-                R.id.btn02 -> {
+                R.id.btn01 -> {
+                    idBtn = 2
+                    btn01.isClickable = false
+                }
 
+                R.id.btn02 -> {
+                    idBtn = 3
+                    btn02.isClickable = false
+                }
+                R.id.btn03 -> {
+                    idBtn = 4
+                    btn03.isClickable = false
+                }
+                R.id.btn04 -> {
+                    idBtn = 5
+                    btn04.isClickable = false
+                }
+                R.id.btn05 -> {
+                    idBtn = 6
+                    btn05.isClickable = false
+                }
+                R.id.btn06 -> {
+                    idBtn = 7
+                    btn06.isClickable = false
+                }
+                R.id.btn07 -> {
+                    idBtn = 8
+                    btn07.isClickable = false
+                }
+                R.id.btn08 -> {
+                    idBtn = 9
+                    btn08.isClickable = false
                 }
             }
         }
+        playTurn(idBtn, selectedBlock)
+
+    }
+
+    private fun playTurn(idBtn: Int, block: ImageView) {
+
+        Log.d(TAG, idBtn.toString())
+        if (currentPlayer == 1) {
+            loadXGif(block)
+
+        }
+
+    }
+
+    private fun mapToBoard(player: String, block: Int) {
+
     }
 }
