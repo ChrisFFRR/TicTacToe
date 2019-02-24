@@ -13,7 +13,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_main.*
 
-var board = arrayOf<Array<Int>>()
+//var board = arrayOf<Array<Int>>()
+var board = mutableListOf<Array<Int>>()
 
 private val TAG = "The debugger is saying"
 private var currentPlayer = 1
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeBlocksToZero()
+
 
 
         val btn00: ImageView = findViewById(R.id.btn00)
@@ -168,7 +170,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             //loadXGif(block)
             block.setImageResource(R.drawable.xpng)
             mapToBoard(1, idBtn)
-            currentPlayer = 2
+            sysOutPrintBoard()
+            //currentPlayer = 2
         } else {
             block.setImageResource(R.drawable.opng)
             mapToBoard(2, idBtn)
@@ -184,18 +187,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             for (row in 0..2) {
                 tempArray += 0
             }
-            board += tempArray
+            board.plusAssign(tempArray)
 
         }
     }
 
-    private fun inserteBoardetHuskeliste() {
-        board[0][0] = 1
-        for (i in 1..2) {
-            board[1][i] = 1
-        }
+    private fun resetBoard() {
+
         for (i in 0..2) {
-            board[2][i] = 1
+            board[0][i] = 0
+            for(j in 0..2) {
+                board[1][j] = 0
+                for(k in 0..2) {
+                    board[2][k] = 0
+                }
+            }
         }
     }
 
@@ -209,6 +215,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun mapToBoard(player: Int, block: Int) {
+        when (block) {
+            1 -> board[0][0] = player
+            2 -> board[0][1] = player
+            3 -> board[0][2] = player
+            4 -> board[1][0] = player
+            5 -> board[1][1] = player
+            6 -> board[1][2] = player
+            7 -> board[2][0] = player
+            8 -> board[2][1] = player
+            9 -> board[2][2] = player
+
+        }
 
 
     }
