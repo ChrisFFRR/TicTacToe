@@ -10,21 +10,21 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_main.*
 
+var board = arrayOf<Array<Int>>()
+
+private val TAG = "The debugger is saying"
+private var currentPlayer = 1
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    private val TAG = "The debugger is saying"
-
-    private var currentPlayer = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initializeBlocksToZero()
 
 
         val btn00: ImageView = findViewById(R.id.btn00)
@@ -61,17 +61,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         Glide.with(this)
             .asGif()
-            //.listener(listenerStopGif())
+            .listener(listenerStopGif())
             .load(R.drawable.x)
             .fitCenter()
-            .into(object : ImageViewTarget<GifDrawable>(imageView) {
-                override fun setResource(resource: GifDrawable?) {
-                    resource?.setLoopCount(1)
-                    imageView.setImageDrawable(resource)
-                }
-            })
+            .into(imageView)
+        /*.into(object : ImageViewTarget<GifDrawable>(imageView) {
+            override fun setResource(resource: GifDrawable?) {
+                resource?.setLoopCount(1)
 
+            }
+
+        })*/
     }
+
 
     private fun loadOGif(imageView: ImageView) {
 
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             when (selectedBlock.id) {
                 R.id.btn00 -> {
                     idBtn = 1
-                    btn01.isClickable = false
+                    btn00.isClickable = false
                     Log.d(TAG, "click")
                 }
                 R.id.btn01 -> {
@@ -163,13 +165,51 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         Log.d(TAG, idBtn.toString())
         if (currentPlayer == 1) {
-            loadXGif(block)
-
+            //loadXGif(block)
+            block.setImageResource(R.drawable.xpng)
+            mapToBoard(1, idBtn)
+            currentPlayer = 2
+        } else {
+            block.setImageResource(R.drawable.opng)
+            mapToBoard(2, idBtn)
+            currentPlayer = 1
         }
 
     }
 
-    private fun mapToBoard(player: String, block: Int) {
+    private fun initializeBlocksToZero() {
+
+        for (col in 0..2) {
+            var tempArray = arrayOf<Int>()
+            for (row in 0..2) {
+                tempArray += 0
+            }
+            board += tempArray
+
+        }
+    }
+
+    private fun inserteBoardetHuskeliste() {
+        board[0][0] = 1
+        for (i in 1..2) {
+            board[1][i] = 1
+        }
+        for (i in 0..2) {
+            board[2][i] = 1
+        }
+    }
+
+    private fun sysOutPrintBoard() {
+        for (array in board) {
+            for (value in array) {
+                print("$value")
+            }
+            println()
+        }
+    }
+
+    private fun mapToBoard(player: Int, block: Int) {
+
 
     }
 }
