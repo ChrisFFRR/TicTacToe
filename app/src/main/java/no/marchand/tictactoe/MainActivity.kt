@@ -32,25 +32,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
         val btn00: ImageView = findViewById(R.id.btn00)
-        btn00.isClickable = true
+        btn00.isClickable = false
         val btn01: ImageView = findViewById(R.id.btn01)
-        btn01.isClickable = true
+        btn01.isClickable = false
         val btn02: ImageView = findViewById(R.id.btn02)
-        btn02.isClickable = true
+        btn02.isClickable = false
         val btn03: ImageView = findViewById(R.id.btn03)
-        btn03.isClickable = true
+        btn03.isClickable = false
         val btn04: ImageView = findViewById(R.id.btn04)
-        btn04.isClickable = true
+        btn04.isClickable = false
         val btn05: ImageView = findViewById(R.id.btn05)
-        btn05.isClickable = true
+        btn05.isClickable = false
         val btn06: ImageView = findViewById(R.id.btn06)
-        btn06.isClickable = true
+        btn06.isClickable = false
         val btn07: ImageView = findViewById(R.id.btn07)
-        btn07.isClickable = true
+        btn07.isClickable = false
         val btn08: ImageView = findViewById(R.id.btn08)
-        btn08.isClickable = true
+        btn08.isClickable = false
 
-        val timer: Chronometer = findViewById(R.id.timer)
+
         val startBtn: Button = findViewById(R.id.startBtn)
         val pauseBtn: Button = findViewById(R.id.pauseBtn)
 
@@ -76,46 +76,44 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         var idBtn = 0
-        var selectedBlock = v as ImageView
-        if (selectedBlock != null) {
-            when (selectedBlock.id) {
-                R.id.btn00 -> {
-                    idBtn = 1
-                    btn00.isClickable = false
-                }
-                R.id.btn01 -> {
-                    idBtn = 2
-                    btn01.isClickable = false
-                }
+        val selectedBlock = v as ImageView
+        when (selectedBlock.id) {
+            R.id.btn00 -> {
+                idBtn = 1
+                btn00.isClickable = false
+            }
+            R.id.btn01 -> {
+                idBtn = 2
+                btn01.isClickable = false
+            }
 
-                R.id.btn02 -> {
-                    idBtn = 3
-                    btn02.isClickable = false
-                }
-                R.id.btn03 -> {
-                    idBtn = 4
-                    btn03.isClickable = false
-                }
-                R.id.btn04 -> {
-                    idBtn = 5
-                    btn04.isClickable = false
-                }
-                R.id.btn05 -> {
-                    idBtn = 6
-                    btn05.isClickable = false
-                }
-                R.id.btn06 -> {
-                    idBtn = 7
-                    btn06.isClickable = false
-                }
-                R.id.btn07 -> {
-                    idBtn = 8
-                    btn07.isClickable = false
-                }
-                R.id.btn08 -> {
-                    idBtn = 9
-                    btn08.isClickable = false
-                }
+            R.id.btn02 -> {
+                idBtn = 3
+                btn02.isClickable = false
+            }
+            R.id.btn03 -> {
+                idBtn = 4
+                btn03.isClickable = false
+            }
+            R.id.btn04 -> {
+                idBtn = 5
+                btn04.isClickable = false
+            }
+            R.id.btn05 -> {
+                idBtn = 6
+                btn05.isClickable = false
+            }
+            R.id.btn06 -> {
+                idBtn = 7
+                btn06.isClickable = false
+            }
+            R.id.btn07 -> {
+                idBtn = 8
+                btn07.isClickable = false
+            }
+            R.id.btn08 -> {
+                idBtn = 9
+                btn08.isClickable = false
             }
         }
         playTurn(idBtn, selectedBlock)
@@ -124,6 +122,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun newGame() {
         currentPlayer = 1
+        btn00.isClickable = true
+        btn01.isClickable = true
+        btn02.isClickable = true
+        btn03.isClickable = true
+        btn04.isClickable = true
+        btn05.isClickable = true
+        btn06.isClickable = true
+        btn07.isClickable = true
+        btn08.isClickable = true
         resetBoard()
 
     }
@@ -143,7 +150,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             sysOutPrintBoard()
             1
         }
-        var winner = didWin()
+        val winner = didWin()
 
         if(winner != 0) displayWinner(winner)
     }
@@ -158,6 +165,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if(winner.equals(3)) {
             Log.d("WINNER", "DRAW")
         }
+       pauseTimer()
     }
 
 
