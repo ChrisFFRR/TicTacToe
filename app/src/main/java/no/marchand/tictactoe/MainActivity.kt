@@ -122,21 +122,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun startTimer() {
-        if (!timerRunning) {
-            timer.base = SystemClock.elapsedRealtime() - timerPauseOffset
-            timer.start()
-            timerRunning = true
-        }
-    }
+    private fun newGame() {
+        currentPlayer = 1
+        resetBoard()
 
-    private fun pauseTimer() {
-        if (timerRunning) {
-            timer.stop()
-            timerPauseOffset = SystemClock.elapsedRealtime() - timer.base
-
-            timerRunning = false
-        }
     }
 
 
@@ -144,7 +133,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         Log.d(TAG, idBtn.toString())
         currentPlayer = if (currentPlayer == 1) {
-            //loadXGif(block)
             block.setImageResource(R.drawable.xpng)
             mapToBoard(1, idBtn)
             sysOutPrintBoard()
@@ -155,14 +143,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             sysOutPrintBoard()
             1
         }
-        didWin()
+        var winner = didWin()
+
+        if(winner != 0) displayWinner(winner)
     }
 
-    private fun newGame() {
-        currentPlayer = 1
-        resetBoard()
-
+    private fun displayWinner(winner: Int) {
+        if(winner.equals(1)) {
+            Log.d("WINNER", "PLAYER ONE")
+        }
+        if(winner.equals(2)) {
+            Log.d("WINNER", "PLAYER TWO")
+        }
+        if(winner.equals(3)) {
+            Log.d("WINNER", "DRAW")
+        }
     }
+
 
     private fun initializeBlocksToZero() {
 
@@ -189,14 +186,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         currentPlayer = 1
     }
 
-    private fun sysOutPrintBoard() {
-        for (array in board) {
-            for (value in array) {
-                print("$value")
-            }
-            println()
-        }
-    }
 
     private fun mapToBoard(player: Int, block: Int) {
         when (block) {
@@ -210,6 +199,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             8 -> board[2][1] = player
             9 -> board[2][2] = player
 
+        }
+    }
+
+    private fun sysOutPrintBoard() {
+        for (array in board) {
+            for (value in array) {
+                print("$value")
+            }
+            println()
+        }
+    }
+
+    private fun startTimer() {
+        if (!timerRunning) {
+            timer.base = SystemClock.elapsedRealtime() - timerPauseOffset
+            timer.start()
+            timerRunning = true
+        }
+    }
+
+    private fun pauseTimer() {
+        if (timerRunning) {
+            timer.stop()
+            timerPauseOffset = SystemClock.elapsedRealtime() - timer.base
+
+            timerRunning = false
         }
     }
 }
