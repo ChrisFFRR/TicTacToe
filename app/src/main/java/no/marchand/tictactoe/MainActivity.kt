@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initializeBlocksToZero()
-
+        newGame()
 
 
         val btn00: ImageView = findViewById(R.id.btn00)
@@ -166,18 +165,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun playTurn(idBtn: Int, block: ImageView) {
 
         Log.d(TAG, idBtn.toString())
-        if (currentPlayer == 1) {
+        currentPlayer = if (currentPlayer == 1) {
             //loadXGif(block)
             block.setImageResource(R.drawable.xpng)
             mapToBoard(1, idBtn)
             sysOutPrintBoard()
-            //currentPlayer = 2
+            2
         } else {
             block.setImageResource(R.drawable.opng)
             mapToBoard(2, idBtn)
-            currentPlayer = 1
+            sysOutPrintBoard()
+            1
         }
+        didWin()
+    }
 
+    private fun newGame() {
+        currentPlayer = 1
+        initializeBlocksToZero()
     }
 
     private fun initializeBlocksToZero() {
@@ -188,7 +193,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 tempArray += 0
             }
             board.plusAssign(tempArray)
-
         }
     }
 
@@ -196,13 +200,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         for (i in 0..2) {
             board[0][i] = 0
-            for(j in 0..2) {
+            for (j in 0..2) {
                 board[1][j] = 0
-                for(k in 0..2) {
+                for (k in 0..2) {
                     board[2][k] = 0
                 }
             }
         }
+        currentPlayer = 1
     }
 
     private fun sysOutPrintBoard() {
@@ -227,7 +232,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             9 -> board[2][2] = player
 
         }
-
-
     }
 }
