@@ -2,8 +2,11 @@ package no.marchand.tictactoe
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.Chronometer
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -20,12 +23,13 @@ private val TAG = "The debugger is saying"
 private var currentPlayer = 1
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
+    private var timerRunning: Boolean = false
+    private var timerPauseOffset: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        newGame()
+        initializeBlocksToZero()
 
 
         val btn00: ImageView = findViewById(R.id.btn00)
@@ -47,6 +51,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val btn08: ImageView = findViewById(R.id.btn08)
         btn08.isClickable = true
 
+        val timer: Chronometer = findViewById(R.id.timer)
+        val startBtn: Button = findViewById(R.id.startBtn)
+        val pauseBtn: Button = findViewById(R.id.pauseBtn)
+
         btn00.setOnClickListener(this)
         btn01.setOnClickListener(this)
         btn02.setOnClickListener(this)
@@ -56,6 +64,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn06.setOnClickListener(this)
         btn07.setOnClickListener(this)
         btn08.setOnClickListener(this)
+
+        startBtn.setOnClickListener {
+            newGame()
+            startTimer()
+        }
+        pauseBtn.setOnClickListener {
+            pauseTimer()
+        }
+
     }
 
     fun loadXGif(imageView: ImageView) {
@@ -121,7 +138,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.btn00 -> {
                     idBtn = 1
                     btn00.isClickable = false
-                    Log.d(TAG, "click")
                 }
                 R.id.btn01 -> {
                     idBtn = 2
@@ -162,6 +178,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun startTimer() {
+        if (!timerRunning) {
+            timer.base = SystemClock.elapsedRealtime() - timerPauseOffset
+            timer.start()
+            timerRunning = true
+        }
+    }
+
+    private fun pauseTimer() {
+        if (timerRunning) {
+            timer.stop()
+            timerPauseOffset = SystemClock.elapsedRealtime() - timer.base
+
+            timerRunning = false
+        }
+    }
+
+
     private fun playTurn(idBtn: Int, block: ImageView) {
 
         Log.d(TAG, idBtn.toString())
@@ -182,7 +216,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun newGame() {
         currentPlayer = 1
-        initializeBlocksToZero()
+        resetBoard()
+
     }
 
     private fun initializeBlocksToZero() {
