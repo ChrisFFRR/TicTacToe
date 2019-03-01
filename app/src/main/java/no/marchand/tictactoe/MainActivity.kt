@@ -16,7 +16,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_main.*
 
-//var board = arrayOf<Array<Int>>()
 var board = mutableListOf<Array<Int>>()
 
 private val TAG = "The debugger is saying"
@@ -74,61 +73,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
-
-    fun loadXGif(imageView: ImageView) {
-
-        Glide.with(this)
-            .asGif()
-            .listener(listenerStopGif())
-            .load(R.drawable.x)
-            .fitCenter()
-            .into(imageView)
-        /*.into(object : ImageViewTarget<GifDrawable>(imageView) {
-            override fun setResource(resource: GifDrawable?) {
-                resource?.setLoopCount(1)
-
-            }
-
-        })*/
-    }
-
-
-    private fun loadOGif(imageView: ImageView) {
-
-        Glide.with(this)
-            .asGif()
-            .listener(listenerStopGif())
-            .load(R.drawable.o)
-            .fitCenter()
-            .into(imageView)
-    }
-
-    private fun listenerStopGif(): RequestListener<GifDrawable> {
-        return object : RequestListener<GifDrawable> {
-            override fun onLoadFailed(
-                e: GlideException?,
-                model: Any?,
-                target: Target<GifDrawable>?,
-                isFirstResource: Boolean
-            ): Boolean {
-                return false
-            }
-
-            override fun onResourceReady(
-                resource: GifDrawable?,
-                model: Any?,
-                target: Target<GifDrawable>?,
-                dataSource: DataSource?,
-                isFirstResource: Boolean
-            ): Boolean {
-                resource?.setLoopCount(1)
-
-                return false
-            }
-
-        }
-    }
-
 
     override fun onClick(v: View?) {
         var idBtn = 0
