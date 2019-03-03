@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 
 var board = mutableListOf<Array<Int>>()
@@ -30,6 +31,8 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
+
+        val gameDisplay: TextView = view.findViewById(R.id.displayTxtView)
 
         val btn00: ImageView = view.findViewById(R.id.btn00)
         buttonsArray.add(btn00)
@@ -133,6 +136,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
                     btn08.isClickable = false
                 }
             }
+            displayCurrentPlayer()
             playTurn(idBtn, selectedBlock)
         }
 
@@ -140,6 +144,8 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
 
     private fun newGame() {
         gameInProgress = true
+        displayTxtView.setBackgroundResource(android.R.color.transparent)
+        displayCurrentPlayer()
         for(button in buttonsArray) {
             button.isClickable = true
         }
@@ -150,7 +156,6 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
 
 
     private fun playTurn(idBtn: Int, block: ImageView) {
-
         Log.d(TAG, idBtn.toString())
         currentPlayer = if (currentPlayer == 1) {
             block.setImageResource(R.drawable.xpng)
@@ -158,24 +163,37 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
             sysOutPrintBoard()
             2
         } else {
+
             block.setImageResource(R.drawable.opng)
             mapToBoard(2, idBtn)
             sysOutPrintBoard()
             1
         }
+        displayCurrentPlayer()
         val winner = didWin()
 
         if(winner != 0) displayWinner(winner)
     }
 
+    private fun displayCurrentPlayer() {
+        if(currentPlayer == 1 ) {
+            displayTxtView.text = "Player: You"
+        } else {
+            displayTxtView.text = "Player: TTTBot"
+        }
+    }
+
     private fun displayWinner(winner: Int) {
         if(winner.equals(1)) {
+            displayTxtView.text = "Player One Wins!"
             Log.d("WINNER", "PLAYER ONE")
         }
         if(winner.equals(2)) {
+            displayTxtView.text = "Player Two Wins!"
             Log.d("WINNER", "PLAYER TWO")
         }
         if(winner.equals(3)) {
+            displayTxtView.text = "Draw! Try Again"
             Log.d("WINNER", "DRAW")
         }
         pauseTimer()
@@ -257,7 +275,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
 
     private fun resetTimer() {
         timer.base = SystemClock.elapsedRealtime()
-        timerPauseOffset = 0;
+        timerPauseOffset = 0
     }
 
 

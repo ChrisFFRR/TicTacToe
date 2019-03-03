@@ -8,10 +8,14 @@
         android:background="@android:color/black"
         >
 
-    <ImageView
+    <TextView
+            android:id="@+id/displayTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/tttlogo"
+            android:fontFamily="@font/lazer"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
             app:layout_constraintEnd_toEndOf="parent"
