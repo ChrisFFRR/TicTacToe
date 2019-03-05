@@ -1,5 +1,6 @@
 https://abhiandroid.com/ui/chronometer
 https://www.youtube.com/watch?v=RLnb4vVkftc
+http://www.androiddeft.com/2017/11/12/shared-preferences-android-kotlin/
 
 # Spørsmål til Tor Morten
 
