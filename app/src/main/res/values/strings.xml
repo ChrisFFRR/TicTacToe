@@ -12,5 +12,7 @@
     <string name="btn7">btn7</string>
     <string name="btn8">btn8</string>
     <string name="btn9">btn9</string>
+    <string name="play_btn">PLAY</string>
+    <string name="player_name_editTxt">Player Name</string>
 
 </resources>
