@@ -189,7 +189,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
             Log.d("WINNER", "PLAYER ONE")
         }
         if(winner.equals(2)) {
-            displayTxtView.text = "Player Two Wins!"
+            displayTxtView.text = "TTTBot Wins!"
             Log.d("WINNER", "PLAYER TWO")
         }
         if(winner.equals(3)) {
