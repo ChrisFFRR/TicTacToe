@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/logInFragment">
+            app:startDestination="@id/gameScreenFragment">
 
     <fragment
             android:id="@+id/logInFragment"
@@ -10,7 +10,8 @@
             android:label="LogInFragment">
         <action
                 android:id="@+id/action_logInFragment_to_gameScreenFragment"
-                app:destination="@id/gameScreenFragment"/>
+                app:destination="@id/gameScreenFragment"
+                />
     </fragment>
     <fragment
             android:id="@+id/gameScreenFragment"

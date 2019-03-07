@@ -2,7 +2,7 @@ package no.marchand.tictactoe
 
 
 import android.content.Context
-import android.content.Intent
+
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,8 +19,6 @@ import kotlinx.android.synthetic.main.log_in_fragment.*
 
 class LogInFragment : Fragment() {
 
-private val EMPTY = ""
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.log_in_fragment, container, false)
@@ -36,15 +34,12 @@ private val EMPTY = ""
             editor.putString("UserName", editTextUserName.text.toString())
             editor.apply()
 
-            Log.d("DEBUG", logInPrefs.getString("UserName",""))
-            if(logInPrefs.getString("UserName", "").isNotEmpty()) {
+            Log.d("DEBUG", logInPrefs.getString("UserName", ""))
+            if (logInPrefs.getString("UserName", "").isNotEmpty()) {
                 Navigation.findNavController(view).navigate(R.id.gameScreenFragment)
             }
         }
-
         return view
     }
-
-
 }
 

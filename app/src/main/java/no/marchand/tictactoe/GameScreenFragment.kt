@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 
 var board = mutableListOf<Array<Int>>()
@@ -97,7 +98,15 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         }
 
         initializeBlocksToZero()
+
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(userName.isEmpty()) {
+            Navigation.findNavController(view).navigate(R.id.logInFragment)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -170,7 +179,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             sysOutPrintBoard()
             2
         } else {
-
             block.setImageResource(R.drawable.opng)
             mapToBoard(2, idBtn)
             sysOutPrintBoard()
