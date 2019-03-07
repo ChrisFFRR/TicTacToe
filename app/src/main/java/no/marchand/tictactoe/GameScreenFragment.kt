@@ -1,6 +1,7 @@
 package no.marchand.tictactoe
 
-import android.media.Image
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.app.Fragment
@@ -21,14 +22,22 @@ private val TAG = "The debugger is saying"
 private var currentPlayer = 1
 
 
-class GameScreenFragment: Fragment(), View.OnClickListener {
+class GameScreenFragment : Fragment(), View.OnClickListener {
 
     private var timerRunning: Boolean = false
     private var timerPauseOffset: Long = 0
+    private lateinit var loadPrefs: SharedPreferences
+    private var userName = ""
+
 
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
+        userName = loadPrefs.getString("UserName", null)!!
+
+        Log.d("DEBUG", userName)
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
@@ -62,7 +71,6 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
         buttonsArray.add(btn08)
 
 
-
         val startBtn: Button = view.findViewById(R.id.startBtn)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
 
@@ -77,11 +85,10 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
         btn08.setOnClickListener(this)
 
         startBtn.setOnClickListener {
-            if(!timerRunning && timesPlayed == 0 && !gameInProgress) {
+            if (!timerRunning && timesPlayed == 0 && !gameInProgress) {
                 newGame()
                 startTimer()
-            }
-            else {
+            } else {
                 startTimer()
             }
         }
@@ -94,7 +101,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        if(gameInProgress) {
+        if (gameInProgress) {
             var idBtn = 0
             val selectedBlock = v as ImageView
             when (selectedBlock.id) {
@@ -146,7 +153,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
         gameInProgress = true
         displayTxtView.setBackgroundResource(android.R.color.transparent)
         displayCurrentPlayer()
-        for(button in buttonsArray) {
+        for (button in buttonsArray) {
             button.isClickable = true
         }
         resetBoard()
@@ -172,27 +179,27 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
         displayCurrentPlayer()
         val winner = didWin()
 
-        if(winner != 0) displayWinner(winner)
+        if (winner != 0) displayWinner(winner)
     }
 
     private fun displayCurrentPlayer() {
-        if(currentPlayer == 1 ) {
-            displayTxtView.text = "Player: You"
+        if (currentPlayer == 1) {
+            displayTxtView.text = "Player: $userName"
         } else {
             displayTxtView.text = "Player: TTTBot"
         }
     }
 
     private fun displayWinner(winner: Int) {
-        if(winner.equals(1)) {
-            displayTxtView.text = "Player One Wins!"
+        if (winner.equals(1)) {
+            displayTxtView.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
         }
-        if(winner.equals(2)) {
+        if (winner.equals(2)) {
             displayTxtView.text = "TTTBot Wins!"
             Log.d("WINNER", "PLAYER TWO")
         }
-        if(winner.equals(3)) {
+        if (winner.equals(3)) {
             displayTxtView.text = "Draw! Try Again"
             Log.d("WINNER", "DRAW")
         }
@@ -213,7 +220,7 @@ class GameScreenFragment: Fragment(), View.OnClickListener {
 
     private fun resetBoard() {
 
-        for(button in buttonsArray) {
+        for (button in buttonsArray) {
             button.setImageResource(0)
         }
 

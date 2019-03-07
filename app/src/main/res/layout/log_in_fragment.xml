@@ -23,7 +23,6 @@
             android:layout_width="275dp"
             android:layout_height="82dp"
             android:inputType="textPersonName"
-            android:text="@string/player_name_editTxt"
             android:ems="10"
             android:id="@+id/editTextUserName"
             android:textColor="@color/colorPrimary"
@@ -34,9 +33,11 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
-            android:hint="Player Name"
+            android:hint="@string/player_name_txt_placeholder"
+            android:textColorHint="@color/colorPrimary"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
     <Button
             android:text="@string/play_btn"
