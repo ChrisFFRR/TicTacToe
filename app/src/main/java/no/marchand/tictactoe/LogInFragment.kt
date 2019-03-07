@@ -39,10 +39,6 @@ private val EMPTY = ""
             Log.d("DEBUG", logInPrefs.getString("UserName",""))
             if(logInPrefs.getString("UserName", "").isNotEmpty()) {
                 Navigation.findNavController(view).navigate(R.id.gameScreenFragment)
-            } else {
-                /*
-                Todo MAKE TOAST
-                 */
             }
         }
 
