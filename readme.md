@@ -19,8 +19,12 @@ Jeg skrev først all kode i mainactivity.kt, men har nå gjort det om til en ege
  ## Spørsmål 2:
   - Vi gikk gjennom Room og databasebehandling i går, vil du si at det er lurt å bruke denne fremgangsmåten for high-score delen av dette prosjektet? Eller er det nok å skrive en high-score klasse hvor man har en Map som holder på vinner + tid f.eks?
   
-  ##Oppdatering:
+  ## Oppdatering:
   - Jeg har laget en ny branch etter jeg skrev Readme med spørsmål, hvor jeg bruker sharedPreferences, men er litt usikker på om jeg gjør det på riktig måte. Jeg setter pris på om du kunne skrevet en liten tilbakemelding på det jeg har gjort i LogInBranch
+  
+  ## Oppdatering 2!:
+  
+  -vennligst se på NavigationBranchen da dette er den nyeste løsningen på arkitektur
   
     
    
