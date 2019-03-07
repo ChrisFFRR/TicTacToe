@@ -15,16 +15,17 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.log_in_fragment.*
 
 
-class LogInFragment: Fragment() {
+class LogInFragment : Fragment() {
+
 
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.log_in_fragment, container, false)
 
+
         val logInPrefs: SharedPreferences = activity!!.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
         val editor = logInPrefs.edit()
-
 
         val userNameTxtView: EditText = view.findViewById(R.id.editTextUserName)
         val playBtn: Button = view.findViewById(R.id.playBtn)
@@ -37,15 +38,12 @@ class LogInFragment: Fragment() {
             Log.d("DEBUG", userNameTxtView.text.toString())
 
             val goToGame = Intent()
-
             goToGame.setClass(activity, MainActivity::class.java)
             startActivity(goToGame)
-
-
         }
 
         return view
     }
 
-
 }
+
