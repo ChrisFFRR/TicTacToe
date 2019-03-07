@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 
@@ -42,7 +41,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
-        val gameDisplay: TextView = view.findViewById(R.id.displayTxtView)
+        //val gameDisplay: TextView = view.findViewById(R.id.displayTxtView)
 
         val btn00: ImageView = view.findViewById(R.id.btn00)
         buttonsArray.add(btn00)
@@ -74,6 +73,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
         val startBtn: Button = view.findViewById(R.id.startBtn)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
+        val logoutBtn: Button = view.findViewById(R.id.logoutBtn)
 
         btn00.setOnClickListener(this)
         btn01.setOnClickListener(this)
@@ -95,6 +95,12 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         }
         pauseBtn.setOnClickListener {
             pauseTimer()
+        }
+
+        logoutBtn.setOnClickListener{
+            loadPrefs.edit().remove("UserName")
+            loadPrefs.edit().apply()
+            Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
 
         initializeBlocksToZero()
@@ -160,7 +166,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     private fun newGame() {
         gameInProgress = true
-        displayTxtView.setBackgroundResource(android.R.color.transparent)
+        //displayTxtView.setBackgroundResource(android.R.color.transparent)
         displayCurrentPlayer()
         for (button in buttonsArray) {
             button.isClickable = true
@@ -192,23 +198,23 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     private fun displayCurrentPlayer() {
         if (currentPlayer == 1) {
-            displayTxtView.text = "Player: $userName"
+            textViewCurrentPlayer.text = "Player: $userName"
         } else {
-            displayTxtView.text = "Player: TTTBot"
+            textViewCurrentPlayer.text = "Player: TTTBot"
         }
     }
 
     private fun displayWinner(winner: Int) {
         if (winner.equals(1)) {
-            displayTxtView.text = "$userName Wins!"
+            textViewCurrentPlayer.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
         }
         if (winner.equals(2)) {
-            displayTxtView.text = "TTTBot Wins!"
+            textViewCurrentPlayer.text = "TTTBot Wins!"
             Log.d("WINNER", "PLAYER TWO")
         }
         if (winner.equals(3)) {
-            displayTxtView.text = "Draw! Try Again"
+            textViewCurrentPlayer.text = "Draw! Try Again"
             Log.d("WINNER", "DRAW")
         }
         pauseTimer()

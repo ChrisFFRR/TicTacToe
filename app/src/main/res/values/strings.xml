@@ -15,5 +15,8 @@
     <string name="play_btn">PLAY</string>
     <string name="player_name_editTxt">Player Name</string>
     <string name="player_name_txt_placeholder">Player Name</string>
+    <string name="logout_btn">logout</string>
+    <string name="log_out_btn_display">Log Out</string>
+    <string name="logo_img">LogoImg</string>
 
 </resources>
