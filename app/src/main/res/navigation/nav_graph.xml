@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/logInFragment"
-            android:name="no.marchand.tictactoe.LogInFragment"
+            android:name="no.marchand.tictactoe.Fragments.LogInFragment"
             android:label="LogInFragment">
         <action
                 android:id="@+id/action_logInFragment_to_gameScreenFragment"
@@ -15,6 +15,6 @@
     </fragment>
     <fragment
             android:id="@+id/gameScreenFragment"
-            android:name="no.marchand.tictactoe.GameScreenFragment"
+            android:name="no.marchand.tictactoe.Fragments.GameScreenFragment"
             android:label="GameScreenFragment"/>
 </navigation>

@@ -1,4 +1,4 @@
-package no.marchand.tictactoe
+package no.marchand.tictactoe.Fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,6 +13,9 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
+import no.marchand.tictactoe.R
+import no.marchand.tictactoe.didWin
+import no.marchand.tictactoe.timesPlayed
 
 var board = mutableListOf<Array<Int>>()
 var buttonsArray = mutableListOf<ImageView>()

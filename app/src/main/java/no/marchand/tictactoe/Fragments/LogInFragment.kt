@@ -1,4 +1,4 @@
-package no.marchand.tictactoe
+package no.marchand.tictactoe.Fragments
 
 
 import android.content.Context
@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import kotlinx.android.synthetic.main.log_in_fragment.*
+import no.marchand.tictactoe.R
 
 
 class LogInFragment : Fragment() {
