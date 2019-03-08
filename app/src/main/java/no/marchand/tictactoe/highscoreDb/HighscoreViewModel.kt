@@ -7,9 +7,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import no.marchand.tictactoe.highscoreDb.HighscoreDatabase
-import no.marchand.tictactoe.highscoreDb.HighscoreRepository
-import no.marchand.tictactoe.highscoreDb.User
 import kotlin.coroutines.CoroutineContext
 
 class HighscoreViewModel(application: Application) : AndroidViewModel(application) {
