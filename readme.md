@@ -1,6 +1,9 @@
 https://abhiandroid.com/ui/chronometer
 https://www.youtube.com/watch?v=RLnb4vVkftc
 http://www.androiddeft.com/2017/11/12/shared-preferences-android-kotlin/
+https://stackoverflow.com/questions/46051658/how-to-save-data-by-using-sharedpreferences-in-a-fragment
+https://www.youtube.com/watch?v=8GCXtCjtg40
+https://developer.android.com/topic/libraries/architecture/navigation
 
 # Spørsmål til Tor Morten
 
