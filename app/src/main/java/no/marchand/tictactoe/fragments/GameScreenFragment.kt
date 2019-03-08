@@ -1,16 +1,16 @@
-package no.marchand.tictactoe.Fragments
+package no.marchand.tictactoe.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.SystemClock
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 import no.marchand.tictactoe.R
@@ -77,6 +77,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         val startBtn: Button = view.findViewById(R.id.startBtn)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
         val logoutBtn: Button = view.findViewById(R.id.logoutBtn)
+        val highscoreBtn: Button = view.findViewById(R.id.highscoreBtn)
 
         btn00.setOnClickListener(this)
         btn01.setOnClickListener(this)
@@ -104,6 +105,10 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
             Navigation.findNavController(view).navigate(R.id.logInFragment)
+        }
+
+        highscoreBtn.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.highscoreFragment)
         }
 
         initializeBlocksToZero()

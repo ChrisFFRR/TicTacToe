@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:id="@+id/UserItemViewTableRow">
+
+        <TextView
+                android:text="@string/highscore_position"
+                android:fontFamily="@font/lazer84"
+                android:textColor="@color/colorAccent"
+                android:layout_column="0"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highScorePositionView"/>
+
+        <TextView
+                android:text="@string/highscore_player"
+                android:fontFamily="@font/lazer84"
+                android:paddingLeft="5dp"
+                android:textColor="@color/colorAccent"
+                android:layout_weight="2"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highScorePlayerNameView"/>
+
+        <TextView
+                android:layout_column="2"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:text="@string/highscore_time"
+                android:fontFamily="@font/lazer84"
+                android:paddingLeft="5dp"
+                android:textColor="@color/colorAccent"
+                android:layout_column="3"
+                android:layout_weight="2"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highscoreTimeView"/>
+    </TableRow>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

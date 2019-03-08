@@ -1,8 +1,8 @@
 package no.marchand.tictactoe
 
 import android.util.Log
-import no.marchand.tictactoe.Fragments.board
-import no.marchand.tictactoe.Fragments.gameInProgress
+import no.marchand.tictactoe.fragments.board
+import no.marchand.tictactoe.fragments.gameInProgress
 
 var timesPlayed = 0
 

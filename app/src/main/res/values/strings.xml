@@ -18,5 +18,11 @@
     <string name="logout_btn">logout</string>
     <string name="log_out_btn_display">Log Out</string>
     <string name="logo_img">LogoImg</string>
+    <string name="high_score_head_line">High Score</string>
+    <string name="highscore_position">1:</string>
+    <string name="highscore_time">  00:20</string>
+    <string name="highscore_player">Christopher</string>
+    <string name="high_score_btn">Highscore</string>
+    <string name="high_score_btn_desc">highscoreBtn</string>
 
 </resources>

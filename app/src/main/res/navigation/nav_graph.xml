@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/logInFragment"
-            android:name="no.marchand.tictactoe.Fragments.LogInFragment"
+            android:name="no.marchand.tictactoe.fragments.LogInFragment"
             android:label="LogInFragment">
         <action
                 android:id="@+id/action_logInFragment_to_gameScreenFragment"
@@ -15,6 +15,20 @@
     </fragment>
     <fragment
             android:id="@+id/gameScreenFragment"
-            android:name="no.marchand.tictactoe.Fragments.GameScreenFragment"
-            android:label="GameScreenFragment"/>
+            android:name="no.marchand.tictactoe.fragments.GameScreenFragment"
+            android:label="GameScreenFragment">
+        <action
+                android:id="@+id/action_gameScreenFragment_to_highscoreFragment"
+                app:destination="@id/highscoreFragment"
+                app:popUpTo="@+id/gameScreenFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/highscoreFragment"
+            android:name="no.marchand.tictactoe.fragments.HighscoreFragment"
+            android:label="HighscoreFragment">
+        <action
+                android:id="@+id/action_highscoreFragment_to_gameScreenFragment"
+                app:destination="@id/gameScreenFragment"/>
+    </fragment>
 </navigation>
