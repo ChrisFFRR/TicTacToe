@@ -21,7 +21,7 @@ class HighscoreAdapter internal constructor (context: Context) : RecyclerView.Ad
 
 
     inner class HighscoreHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userItemView: TableRow = itemView.findViewById(R.id.UserItemViewTableRow)
+       // val userItemView: TableRow = itemView.findViewById(R.id.UserItemViewTableRow)
         val userPos: TextView = itemView.findViewById(R.id.highScorePositionView)
         val userName: TextView = itemView.findViewById(R.id.highScorePlayerNameView)
         val userTime: TextView = itemView.findViewById(R.id.highscoreTimeView)
@@ -39,9 +39,9 @@ class HighscoreAdapter internal constructor (context: Context) : RecyclerView.Ad
     //Sikkert feil
     override fun onBindViewHolder(holder: HighscoreHolder, pos: Int) {
       val current = users[pos]
-        holder.userPos.text = current.user
+        holder.userPos.text = current.id.toString()
         holder.userName.text = current.user
-        holder.userTime.text = current.user
+        holder.userTime.text = current.time.toString()
     }
 
     internal fun setUsers(users: List<User>) {

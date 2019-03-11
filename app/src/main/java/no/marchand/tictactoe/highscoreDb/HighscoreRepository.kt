@@ -12,4 +12,9 @@ class HighscoreRepository(private val userDao: UserDao) {
      fun insert(user: User) {
         userDao.insert(user)
     }
+
+    @WorkerThread
+    fun deleteAll() {
+        userDao.deleteAllUsers()
+    }
 }

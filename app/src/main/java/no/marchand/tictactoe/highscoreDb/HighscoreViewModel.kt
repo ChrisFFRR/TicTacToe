@@ -29,6 +29,10 @@ class HighscoreViewModel(application: Application) : AndroidViewModel(applicatio
         repository.insert(user)
     }
 
+    fun deleteAll() = scope.launch(Dispatchers.IO) {
+        repository.deleteAll()
+    }
+
     fun getAll(): LiveData<List<User>> {
         return repository.allUsers
     }

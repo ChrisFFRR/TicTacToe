@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import no.marchand.tictactoe.R
 import no.marchand.tictactoe.highscoreDb.HighscoreViewModel
 
-class HighscoreFragment: Fragment() {
+class HighscoreFragment : Fragment() {
 
     lateinit var highscoreViewModel: HighscoreViewModel
 
@@ -25,10 +25,13 @@ class HighscoreFragment: Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.HighscoreRecyclerView)
         val adapter = HighscoreAdapter(this.context!!)
 
-        highscoreViewModel.allUsers.observe(this, Observer { users -> users.forEach{ _ ->
-            adapter.setUsers(users)
+        highscoreViewModel.allUsers.observe(this, Observer { users ->
+            users.forEach { _ ->
+                adapter.setUsers(users)
 
-        } })
+
+            }
+        })
 
         recyclerView.layoutManager = LinearLayoutManager(this.context!!)
         recyclerView.adapter = adapter
