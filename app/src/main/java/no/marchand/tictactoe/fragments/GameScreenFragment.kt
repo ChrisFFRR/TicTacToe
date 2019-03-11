@@ -27,6 +27,7 @@ var gameInProgress = false
 
 private val TAG = "The debugger is saying"
 private var currentPlayer = 1
+private var highScoreId = 1
 
 
 class GameScreenFragment : Fragment(), View.OnClickListener {
@@ -36,7 +37,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private lateinit var loadPrefs: SharedPreferences
     private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
-    var highScoreId = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +51,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
         loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
         userName = loadPrefs.getString("UserName", null)!!
-
-
-
-
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
@@ -118,6 +114,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         logoutBtn.setOnClickListener{
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
+            timesPlayed = 0
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
 
@@ -188,6 +185,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     private fun newGame() {
         gameInProgress = true
+        currentPlayer = 1
         //displayTxtView.setBackgroundResource(android.R.color.transparent)
         displayCurrentPlayer()
         for (button in buttonsArray) {
@@ -235,17 +233,21 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             textViewCurrentPlayer.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
            highScoreModel.insert(User(highScoreId, userName,  ((SystemClock.elapsedRealtime() - timer.base) / 1000)))
+            highScoreId += 1
         }
         if (winner.equals(2)) {
             textViewCurrentPlayer.text = "TTTBot Wins!"
             Log.d("WINNER", "PLAYER TWO")
-        }
-        if (winner.equals(3)) {
-            textViewCurrentPlayer.text = "Draw! Try Again"
-            Log.d("WINNER", "DRAW")
+            highScoreModel.insert(User(highScoreId, "TTTbot", (SystemClock.elapsedRealtime() - timer.base) / 1000))
+            highScoreId += 1
         }
 
-        highScoreId += 1
+
+        if (winner.equals(3)) {
+            textViewCurrentPlayer.text = "Draw! Try Again"
+            currentPlayer = 1
+            Log.d("WINNER", "DRAW")
+        }
         pauseTimer()
     }
 
