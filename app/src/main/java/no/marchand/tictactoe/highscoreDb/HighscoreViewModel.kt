@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 class HighscoreViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: HighscoreRepository
-    private val allUsers: LiveData<List<User>>
+     val allUsers: LiveData<List<User>>
 
     init {
         val userDao = HighscoreDatabase.getDatabase(application).userDao()
@@ -27,6 +27,10 @@ class HighscoreViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun insert(user: User) = scope.launch(Dispatchers.IO) {
         repository.insert(user)
+    }
+
+    fun getAll(): LiveData<List<User>> {
+        return repository.allUsers
     }
 
     override fun onCleared() {

@@ -11,10 +11,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 import no.marchand.tictactoe.R
 import no.marchand.tictactoe.didWin
+import no.marchand.tictactoe.highscoreDb.HighscoreViewModel
+import no.marchand.tictactoe.highscoreDb.User
 import no.marchand.tictactoe.timesPlayed
 
 var board = mutableListOf<Array<Int>>()
@@ -30,9 +34,16 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private var timerRunning: Boolean = false
     private var timerPauseOffset: Long = 0
     private lateinit var loadPrefs: SharedPreferences
+    private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        highScoreModel = HighscoreViewModel(activity!!.application)
+
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,7 +51,9 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
         userName = loadPrefs.getString("UserName", null)!!
 
-        Log.d("DEBUG", userName)
+
+
+
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
@@ -201,7 +214,10 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         displayCurrentPlayer()
         val winner = didWin()
 
-        if (winner != 0) displayWinner(winner)
+        if (winner != 0){
+
+            displayWinner(winner)
+        }
     }
 
     private fun displayCurrentPlayer() {
@@ -216,6 +232,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         if (winner.equals(1)) {
             textViewCurrentPlayer.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
+           highScoreModel.insert(User(0, userName, timer.base))
+
         }
         if (winner.equals(2)) {
             textViewCurrentPlayer.text = "TTTBot Wins!"

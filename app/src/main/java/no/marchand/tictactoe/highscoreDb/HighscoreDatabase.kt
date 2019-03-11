@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class], version = 2, exportSchema = false)
 abstract class HighscoreDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -22,7 +22,7 @@ abstract class HighscoreDatabase : RoomDatabase() {
                 context.applicationContext,
                 HighscoreDatabase::class.java,
                 "Highscore_database"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance
                 instance
             }
