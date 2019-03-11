@@ -16,7 +16,7 @@ https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/
   -vennligst se på NavigationBranchen da dette er den nyeste løsningen på arkitektur
   
   ## Oppdatering 3:
-  - ny branch hvor jeg har begynt å implementere ROOM database for spiller (id, navn og tid)
+  - ny branch (DataBase branch) hvor jeg har implementert ROOM database for spiller (id, navn og tid). Dette er nyeste versjon, og databasen fungerer. 
 
 # Spørsmål til Tor Morten
 
@@ -34,6 +34,8 @@ Jeg skrev først all kode i mainactivity.kt, men har nå gjort det om til en ege
   
  ## Spørsmål 2:
   - Vi gikk gjennom Room og databasebehandling i går, vil du si at det er lurt å bruke denne fremgangsmåten for high-score delen av dette prosjektet? Eller er det nok å skrive en high-score klasse hvor man har en Map som holder på vinner + tid f.eks?
+  
+
   
 
   
