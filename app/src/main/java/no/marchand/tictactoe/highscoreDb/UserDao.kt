@@ -10,7 +10,7 @@ import androidx.room.Query
 interface UserDao{
 
 
-    @Query("SELECT * FROM Highscore_table ORDER BY time DESC")
+    @Query("SELECT * FROM Highscore_table ORDER BY time ASC")
     fun getAllUsers(): LiveData<List<User>>
 
     @Insert

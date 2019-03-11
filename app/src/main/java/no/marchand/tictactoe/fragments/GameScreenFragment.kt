@@ -36,6 +36,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private lateinit var loadPrefs: SharedPreferences
     private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
+    var highScoreId = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -229,11 +230,11 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     }
 
     private fun displayWinner(winner: Int) {
+
         if (winner.equals(1)) {
             textViewCurrentPlayer.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
-           highScoreModel.insert(User(0, userName, timer.base))
-
+           highScoreModel.insert(User(highScoreId, userName,  ((SystemClock.elapsedRealtime() - timer.base) / 1000)))
         }
         if (winner.equals(2)) {
             textViewCurrentPlayer.text = "TTTBot Wins!"
@@ -243,6 +244,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             textViewCurrentPlayer.text = "Draw! Try Again"
             Log.d("WINNER", "DRAW")
         }
+
+        highScoreId += 1
         pauseTimer()
     }
 

@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         highscoreModel = HighscoreViewModel(application)
 
+        highscoreModel.deleteAll()
+
 
     }
 }

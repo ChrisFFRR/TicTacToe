@@ -20,7 +20,6 @@
             android:id="@+id/UserItemViewTableRow">
 
         <TextView
-                android:text="@string/highscore_position"
                 android:fontFamily="@font/lazer84"
                 android:textColor="@color/colorAccent"
                 android:layout_column="0"
@@ -30,7 +29,6 @@
                 android:id="@+id/highScorePositionView"/>
 
         <TextView
-                android:text="@string/highscore_player"
                 android:fontFamily="@font/lazer84"
                 android:paddingLeft="5dp"
                 android:textColor="@color/colorAccent"
@@ -49,7 +47,6 @@
                 />
 
         <TextView
-                android:text="@string/highscore_time"
                 android:fontFamily="@font/lazer84"
                 android:paddingLeft="5dp"
                 android:textColor="@color/colorAccent"
