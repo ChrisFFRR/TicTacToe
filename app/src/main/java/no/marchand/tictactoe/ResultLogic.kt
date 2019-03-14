@@ -10,7 +10,7 @@ var timesPlayed = 0
 fun didWin(): Int {
 
 
-    if (timesPlayed < 7 && gameInProgress) {
+    if (timesPlayed < 8 && gameInProgress) {
         for (col in 0..2) {
             for (i in 0..2) {
 

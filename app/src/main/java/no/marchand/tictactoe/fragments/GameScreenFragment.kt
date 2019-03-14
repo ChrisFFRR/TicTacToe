@@ -111,10 +111,11 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             pauseTimer()
         }
 
-        logoutBtn.setOnClickListener{
+        logoutBtn.setOnClickListener {
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
             timesPlayed = 0
+            resetBoard()
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
 
@@ -122,14 +123,14 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             Navigation.findNavController(view).navigate(R.id.highscoreFragment)
         }
 
-        initializeBlocksToZero()
+        initializeBlocksToZero(board)
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(userName.isEmpty()) {
+        if (userName.isEmpty()) {
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
     }
@@ -139,43 +140,15 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             var idBtn = 0
             val selectedBlock = v as ImageView
             when (selectedBlock.id) {
-                R.id.btn00 -> {
-                    idBtn = 1
-                    btn00.isClickable = false
-                }
-                R.id.btn01 -> {
-                    idBtn = 2
-                    btn01.isClickable = false
-                }
-
-                R.id.btn02 -> {
-                    idBtn = 3
-                    btn02.isClickable = false
-                }
-                R.id.btn03 -> {
-                    idBtn = 4
-                    btn03.isClickable = false
-                }
-                R.id.btn04 -> {
-                    idBtn = 5
-                    btn04.isClickable = false
-                }
-                R.id.btn05 -> {
-                    idBtn = 6
-                    btn05.isClickable = false
-                }
-                R.id.btn06 -> {
-                    idBtn = 7
-                    btn06.isClickable = false
-                }
-                R.id.btn07 -> {
-                    idBtn = 8
-                    btn07.isClickable = false
-                }
-                R.id.btn08 -> {
-                    idBtn = 9
-                    btn08.isClickable = false
-                }
+                R.id.btn00 -> idBtn = 1
+                R.id.btn01 -> idBtn = 2
+                R.id.btn02 -> idBtn = 3
+                R.id.btn03 -> idBtn = 4
+                R.id.btn04 -> idBtn = 5
+                R.id.btn05 -> idBtn = 6
+                R.id.btn06 -> idBtn = 7
+                R.id.btn07 -> idBtn = 8
+                R.id.btn08 -> idBtn = 9
             }
             displayCurrentPlayer()
             playTurn(idBtn, selectedBlock)
@@ -202,22 +175,52 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         currentPlayer = if (currentPlayer == 1) {
             block.setImageResource(R.drawable.xpng)
             mapToBoard(1, idBtn)
-            sysOutPrintBoard()
+            //botPlaying(board) //nytt
+            //mapToBoard(2, idBtn) //nytt
+            sysOutPrintBoard(board)
             2
         } else {
             block.setImageResource(R.drawable.opng)
             mapToBoard(2, idBtn)
-            sysOutPrintBoard()
+            sysOutPrintBoard(board)
             1
         }
+        block.isClickable = false
         displayCurrentPlayer()
         val winner = didWin()
 
-        if (winner != 0){
+        if (winner != 0) {
 
             displayWinner(winner)
         }
     }
+
+    //gjør om
+    private fun botPlaying(gameBoard: MutableList<Array<Int>>) {
+        var i = 0
+        var idBtn = 1
+        val occupiedBlocks = ArrayList<Int>()
+
+
+        while (i <= 2) {
+            for (col in gameBoard) {
+                for (row in gameBoard) {
+                    if (row[i] == 1 || row[i] == 2) {
+                        Log.d("TAG", col[i].toString())
+                        i++
+                    } else {
+                        Log.d("EMPTY CELL", col[i].toString())
+                        i++
+                    }
+                    idBtn++
+
+                }
+
+            }
+        }
+           // return -1
+        }
+
 
     private fun displayCurrentPlayer() {
         if (currentPlayer == 1) {
@@ -232,7 +235,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         if (winner.equals(1)) {
             textViewCurrentPlayer.text = "$userName Wins!"
             Log.d("WINNER", "PLAYER ONE")
-           highScoreModel.insert(User(highScoreId, userName,  ((SystemClock.elapsedRealtime() - timer.base) / 1000)))
+            highScoreModel.insert(User(highScoreId, userName, ((SystemClock.elapsedRealtime() - timer.base) / 1000)))
             highScoreId += 1
         }
         if (winner.equals(2)) {
@@ -252,7 +255,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     }
 
 
-    private fun initializeBlocksToZero() {
+    private fun initializeBlocksToZero(board: MutableList<Array<Int>>) {
 
         for (col in 0..2) {
             var tempArray = arrayOf<Int>()
@@ -297,8 +300,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun sysOutPrintBoard() {
-        for (array in board) {
+    private fun sysOutPrintBoard(boardToPrint: MutableList<Array<Int>>) {
+        for (array in boardToPrint) {
             for (value in array) {
                 print("$value")
             }
