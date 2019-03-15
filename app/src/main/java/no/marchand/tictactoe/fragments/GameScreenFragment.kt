@@ -11,23 +11,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
+import no.marchand.tictactoe.GameBoardModel
 import no.marchand.tictactoe.R
-import no.marchand.tictactoe.didWin
 import no.marchand.tictactoe.highscoreDb.HighscoreViewModel
 import no.marchand.tictactoe.highscoreDb.User
-import no.marchand.tictactoe.timesPlayed
 
-var board = mutableListOf<Array<Int>>()
-var buttonsArray = mutableListOf<ImageView>()
+
+
+var board = GameBoardModel()
 var gameInProgress = false
+
 
 private val TAG = "The debugger is saying"
 private var currentPlayer = 1
 private var highScoreId = 1
+private var timesPlayed = 0
 
 
 class GameScreenFragment : Fragment(), View.OnClickListener {
@@ -37,6 +37,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private lateinit var loadPrefs: SharedPreferences
     private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
+    private var buttonsArray = mutableListOf<ImageView>()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +55,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
-        //val gameDisplay: TextView = view.findViewById(R.id.displayTxtView)
+
+        buttonsArray.clear()
 
         val btn00: ImageView = view.findViewById(R.id.btn00)
         buttonsArray.add(btn00)
@@ -114,15 +117,13 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
             timesPlayed = 0
-            resetBoard()
+            board.resetBoard()
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
 
         highscoreBtn.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.highscoreFragment)
         }
-
-        initializeBlocksToZero(board)
 
         return view
     }
@@ -136,88 +137,63 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (gameInProgress) {
-            var idBtn = 0
             val selectedBlock = v as ImageView
-            when (selectedBlock.id) {
-                R.id.btn00 -> idBtn = 1
-                R.id.btn01 -> idBtn = 2
-                R.id.btn02 -> idBtn = 3
-                R.id.btn03 -> idBtn = 4
-                R.id.btn04 -> idBtn = 5
-                R.id.btn05 -> idBtn = 6
-                R.id.btn06 -> idBtn = 7
-                R.id.btn07 -> idBtn = 8
-                R.id.btn08 -> idBtn = 9
-            }
-            displayCurrentPlayer()
-            playTurn(idBtn, selectedBlock)
-        }
+            val xCoordinate: Int = selectedBlock.contentDescription.substring(1, 2).toInt()
+            val yCoordinate: Int = selectedBlock.contentDescription.substring(2, 3).toInt()
 
+            if (board.readValue(xCoordinate, yCoordinate) == 0) {
+                board.setValue(xCoordinate, yCoordinate, currentPlayer)
+                gameLoop()
+            }
+        }
     }
 
-    private fun newGame() {
+    private  fun newGame() {
         gameInProgress = true
         currentPlayer = 1
-        //displayTxtView.setBackgroundResource(android.R.color.transparent)
+
+
+
         displayCurrentPlayer()
         for (button in buttonsArray) {
             button.isClickable = true
         }
-        resetBoard()
+        board.resetBoard()
+        reDrawBoard()
         resetTimer()
 
     }
 
-
-    private fun playTurn(idBtn: Int, block: ImageView) {
-        Log.d(TAG, idBtn.toString())
-        currentPlayer = if (currentPlayer == 1) {
-            block.setImageResource(R.drawable.xpng)
-            mapToBoard(1, idBtn)
-            //botPlaying(board) //nytt
-            //mapToBoard(2, idBtn) //nytt
-            sysOutPrintBoard(board)
-            2
-        } else {
-            block.setImageResource(R.drawable.opng)
-            mapToBoard(2, idBtn)
-            sysOutPrintBoard(board)
-            1
-        }
-        block.isClickable = false
+    private fun gameLoop() {
         displayCurrentPlayer()
-        val winner = didWin()
-
-        if (winner != 0) {
-
-            displayWinner(winner)
+        reDrawBoard()
+        if (board.determineWinner() != -1) {
+            displayWinner(currentPlayer)
+        }
+        if(currentPlayer == 1) {
+            currentPlayer = 2
+            //botplaying() EGEN KLASSE
+            //gameloop
+        } else {
+            currentPlayer = 1
         }
     }
 
-    //gjør om
-    private fun botPlaying(gameBoard: MutableList<Array<Int>>) {
-
-        //var idBtn = 1
-        val occupiedBlocks = ArrayList<Int>()
-
-
-        /* loop gjennom gameboard, hvis element i rad/kolonne ikke er 1 eller 2, legg til 2 i gameBoard på nåværende pos
-            eller link posisjon med riktig idBtn (1-9) i forhold til posisjon i matrisen, og dermed lag en metode som velger
-            random idBtn som kan tildeles til en ledig plass i matrise..
-         */
-
-        for (row in gameBoard) {
-            for (col in row) {
-                if (!(col == 1 || col == 2)) {
-                    gameBoard[row[col]][col] = 2
-                }
-
-                //idBtn++
-                //Log.d("ID", idBtn.toString())
+    private fun reDrawBoard() {
+        for (index in 0 until board.board.size) {
+            val imageView = buttonsArray[index]
+            val player = board.board[index]
+            if (player == 1) {
+                imageView.setImageResource(R.drawable.xpng)
+                imageView.isClickable = false
+            } else if (player == 2) {
+                imageView.setImageResource(R.drawable.opng)
+                imageView.isClickable = false
+            } else {
+                imageView.setImageResource(0)
             }
-            // return -1
         }
-        sysOutPrintBoard(gameBoard)
+
     }
 
 
@@ -228,6 +204,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             textViewCurrentPlayer.text = "Player: TTTBot"
         }
     }
+
 
     private fun displayWinner(winner: Int) {
 
@@ -253,60 +230,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         pauseTimer()
     }
 
-
-    private fun initializeBlocksToZero(board: MutableList<Array<Int>>) {
-
-        for (col in 0..2) {
-            var tempArray = arrayOf<Int>()
-            for (row in 0..2) {
-                tempArray += 0
-            }
-            board.plusAssign(tempArray)
-        }
-    }
-
-    private fun resetBoard() {
-
-        for (button in buttonsArray) {
-            button.setImageResource(0)
-        }
-
-        for (i in 0..2) {
-            board[0][i] = 0
-            for (j in 0..2) {
-                board[1][j] = 0
-                for (k in 0..2) {
-                    board[2][k] = 0
-                }
-            }
-        }
-        currentPlayer = 1
-    }
-
-
-    private fun mapToBoard(player: Int, block: Int) {
-        when (block) {
-            1 -> board[0][0] = player
-            2 -> board[0][1] = player
-            3 -> board[0][2] = player
-            4 -> board[1][0] = player
-            5 -> board[1][1] = player
-            6 -> board[1][2] = player
-            7 -> board[2][0] = player
-            8 -> board[2][1] = player
-            9 -> board[2][2] = player
-
-        }
-    }
-
-    private fun sysOutPrintBoard(boardToPrint: MutableList<Array<Int>>) {
-        for (array in boardToPrint) {
-            for (value in array) {
-                print("$value")
-            }
-            println()
-        }
-    }
 
     private fun startTimer() {
         if (!timerRunning) {

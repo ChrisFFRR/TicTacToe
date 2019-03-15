@@ -55,7 +55,7 @@
                     android:layout_height="100dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn1"/>
+                    android:contentDescription="@string/b00"/>
 
             <ImageView
                     android:id="@+id/btn01"
@@ -65,7 +65,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn2"/>
+                    android:contentDescription="@string/b10"/>
 
             <ImageView
                     android:id="@+id/btn02"
@@ -73,7 +73,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn3"/>
+                    android:contentDescription="@string/b20"/>
 
             <ImageView
                     android:id="@+id/btn03"
@@ -83,7 +83,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn4"/>
+                    android:contentDescription="@string/b01"/>
 
             <ImageView
                     android:id="@+id/btn04"
@@ -91,7 +91,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn5"/>
+                    android:contentDescription="@string/b11"/>
 
             <ImageView
                     android:id="@+id/btn05"
@@ -99,7 +99,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn6"/>
+                    android:contentDescription="@string/b21"/>
 
             <ImageView
                     android:id="@+id/btn06"
@@ -107,7 +107,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn7"/>
+                    android:contentDescription="@string/b02"/>
 
             <ImageView
                     android:id="@+id/btn07"
@@ -115,7 +115,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn8"/>
+                    android:contentDescription="@string/b12"/>
 
             <ImageView
                     android:id="@+id/btn08"
@@ -123,7 +123,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn9"/>
+                    android:contentDescription="@string/b22"/>
 
 
         </GridLayout>
