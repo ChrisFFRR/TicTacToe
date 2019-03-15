@@ -46,7 +46,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
@@ -197,29 +196,29 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     //gjør om
     private fun botPlaying(gameBoard: MutableList<Array<Int>>) {
-        var i = 0
-        var idBtn = 1
+
+        //var idBtn = 1
         val occupiedBlocks = ArrayList<Int>()
 
 
-        while (i <= 2) {
-            for (col in gameBoard) {
-                for (row in gameBoard) {
-                    if (row[i] == 1 || row[i] == 2) {
-                        Log.d("TAG", col[i].toString())
-                        i++
-                    } else {
-                        Log.d("EMPTY CELL", col[i].toString())
-                        i++
-                    }
-                    idBtn++
+        /* loop gjennom gameboard, hvis element i rad/kolonne ikke er 1 eller 2, legg til 2 i gameBoard på nåværende pos
+            eller link posisjon med riktig idBtn (1-9) i forhold til posisjon i matrisen, og dermed lag en metode som velger
+            random idBtn som kan tildeles til en ledig plass i matrise..
+         */
 
+        for (row in gameBoard) {
+            for (col in row) {
+                if (!(col == 1 || col == 2)) {
+                    gameBoard[row[col]][col] = 2
                 }
 
+                //idBtn++
+                //Log.d("ID", idBtn.toString())
             }
+            // return -1
         }
-           // return -1
-        }
+        sysOutPrintBoard(gameBoard)
+    }
 
 
     private fun displayCurrentPlayer() {
