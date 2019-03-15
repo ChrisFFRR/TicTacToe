@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="@android:color/black"
@@ -16,14 +15,12 @@
             android:fontFamily="@font/lazer"
             android:textSize="30sp"
             android:textColor="@color/colorPrimary"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     <FrameLayout
 
@@ -58,7 +55,7 @@
                     android:layout_height="100dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn1"/>
+                    android:contentDescription="@string/b00"/>
 
             <ImageView
                     android:id="@+id/btn01"
@@ -68,7 +65,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn2"/>
+                    android:contentDescription="@string/b10"/>
 
             <ImageView
                     android:id="@+id/btn02"
@@ -76,7 +73,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn3"/>
+                    android:contentDescription="@string/b20"/>
 
             <ImageView
                     android:id="@+id/btn03"
@@ -86,7 +83,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn4"/>
+                    android:contentDescription="@string/b01"/>
 
             <ImageView
                     android:id="@+id/btn04"
@@ -94,7 +91,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn5"/>
+                    android:contentDescription="@string/b11"/>
 
             <ImageView
                     android:id="@+id/btn05"
@@ -102,7 +99,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn6"/>
+                    android:contentDescription="@string/b21"/>
 
             <ImageView
                     android:id="@+id/btn06"
@@ -110,7 +107,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn7"/>
+                    android:contentDescription="@string/b02"/>
 
             <ImageView
                     android:id="@+id/btn07"
@@ -118,7 +115,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn8"/>
+                    android:contentDescription="@string/b12"/>
 
             <ImageView
                     android:id="@+id/btn08"
@@ -126,7 +123,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/black"
-                    android:contentDescription="@string/btn9"/>
+                    android:contentDescription="@string/b22"/>
 
 
         </GridLayout>
@@ -136,6 +133,7 @@
     <Button
             android:text="@string/play"
             android:fontFamily="@font/lazer"
+            android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/startBtn"
@@ -154,6 +152,7 @@
     <Button
             android:text="@string/pause"
             android:fontFamily="@font/lazer"
+            android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -188,4 +187,55 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toStartOf="@+id/pauseBtn"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/o"
+            android:id="@+id/highscoreBtn"
+            android:scaleType="fitCenter"
+            android:background="@drawable/o"
+            android:text="@string/high_score_btn"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/lazer84"
+            android:textSize="12sp"
+            android:contentDescription="@string/high_score_btn_desc"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/displayTxtView"
+            android:layout_marginEnd="8dp"/>
+
+    <Button
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/o"
+            android:id="@+id/logoutBtn"
+            android:scaleType="fitCenter"
+            android:background="@drawable/o"
+            android:text="@string/logout_btn"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/lazer84"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/displayTxtView"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/log_out_btn_display"
+            app:layout_constraintHorizontal_bias="0.87"/>
+
+    <TextView
+            android:layout_width="267dp"
+            android:layout_height="54dp"
+            android:fontFamily="@font/lazer84"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:id="@+id/textViewCurrentPlayer"
+            android:layout_marginEnd="177dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="176dp"
+            app:layout_constraintTop_toBottomOf="@+id/displayTxtView"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
