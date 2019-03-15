@@ -17,6 +17,9 @@ https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/
   
   ## Oppdatering 3:
   - ny branch (DataBase branch) hvor jeg har implementert ROOM database for spiller (id, navn og tid). Dette er nyeste versjon, og databasen fungerer. 
+  
+  ## Oppdatering 4:
+ - Har merget til master, så master er nyeste versjon. Trenger å implementere AI, så er jeg mer eller mindre ferdig med TTT :)
 
 # Spørsmål til Tor Morten
 
