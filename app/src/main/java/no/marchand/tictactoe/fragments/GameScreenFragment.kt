@@ -18,27 +18,21 @@ import no.marchand.tictactoe.R
 import no.marchand.tictactoe.highscoreDb.HighscoreViewModel
 import no.marchand.tictactoe.highscoreDb.User
 
-
-
-var board = GameBoardModel()
-var gameInProgress = false
-
-
-private val TAG = "The debugger is saying"
-private var currentPlayer = 1
-private var highScoreId = 1
-private var timesPlayed = 0
-
+    private val TAG = "The debugger is saying"
 
 class GameScreenFragment : Fragment(), View.OnClickListener {
 
+    var board = GameBoardModel()
+    var gameInProgress = false
+    private var currentPlayer = 1
+    private var highScoreId = 1
+    private var timesPlayed = 0
     private var timerRunning: Boolean = false
     private var timerPauseOffset: Long = 0
     private lateinit var loadPrefs: SharedPreferences
     private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
     private var buttonsArray = mutableListOf<ImageView>()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +48,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         userName = loadPrefs.getString("UserName", null)!!
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
-
 
         buttonsArray.clear()
 
@@ -148,13 +141,13 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private  fun newGame() {
+    private fun newGame() {
         gameInProgress = true
         currentPlayer = 1
 
 
-
         displayCurrentPlayer()
+
         for (button in buttonsArray) {
             button.isClickable = true
         }
@@ -170,7 +163,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         if (board.determineWinner() != -1) {
             displayWinner(currentPlayer)
         }
-        if(currentPlayer == 1) {
+        if (currentPlayer == 1) {
             currentPlayer = 2
             //botplaying() EGEN KLASSE
             //gameloop
