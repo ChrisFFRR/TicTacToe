@@ -20,6 +20,11 @@ https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/
   
   ## Oppdatering 4:
  - Har merget til master, så master er nyeste versjon. Trenger å implementere AI, så er jeg mer eller mindre ferdig med TTT :)
+ 
+ ## Oppdatering 5:
+ 
+ - Version 1.0 i master! Om du kan, gjerne si om det er noe som mangler eller om det dekker kravene :)
+ 
 
 # Spørsmål til Tor Morten
 
@@ -35,8 +40,7 @@ Jeg skrev først all kode i mainactivity.kt, men har nå gjort det om til en ege
  ## Oppfølgingsspørsmål til fragments:
   - bruker man livssyklusene til fragment eller activity når man har 1 activity - multiple fragments?
   
- ## Spørsmål 2:
-  - Vi gikk gjennom Room og databasebehandling i går, vil du si at det er lurt å bruke denne fremgangsmåten for high-score delen av dette prosjektet? Eller er det nok å skrive en high-score klasse hvor man har en Map som holder på vinner + tid f.eks?
+
   
 
   
