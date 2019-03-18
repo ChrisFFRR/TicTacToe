@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.SystemClock
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +39,9 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private lateinit var loadPrefs: SharedPreferences
     private lateinit var highScoreModel: HighscoreViewModel
     private var userName = ""
+    private var gameType = ""
     private var buttonsArray = mutableListOf<ImageView>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,8 +51,15 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
-        userName = loadPrefs.getString("UserName", "")!!
+        loadPrefs = PreferenceManager.getDefaultSharedPreferences(context)!!
+        userName = loadPrefs.getString("USERNAME", "")!!
+        gameType = loadPrefs.getString("GAMETYPE", "")!!
+        Log.d("USERNAME ", userName)
+        Log.d("GAMETYPE  ", gameType)
+
+
+
+
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 
@@ -111,7 +121,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         }
 
         logoutBtn.setOnClickListener {
-            loadPrefs.edit().remove("UserName")
+            loadPrefs.edit().remove("USERNAME")
+            loadPrefs.edit().remove("GAMETYPE")
             loadPrefs.edit().apply()
             timesPlayed = 0
             board.resetBoard()
@@ -178,9 +189,14 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         if(gameInProgress) {
             if (currentPlayer == 1) {
                 currentPlayer = 2
+                if(gameType == "bot") {
 
-                bot.randomMove()
-                gameLoop()
+                    bot.randomMove()
+                    gameLoop()
+                }
+                if(gameType == "friend") {
+                    displayCurrentPlayer()
+                }
             } else {
                 currentPlayer = 1
                 displayCurrentPlayer()
@@ -207,10 +223,19 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
 
     private fun displayCurrentPlayer() {
-        if (currentPlayer == 1) {
-            textViewCurrentPlayer.text = "Player: $userName"
-        } else {
-            textViewCurrentPlayer.text = "Player: TTTBot"
+        if(gameType == "bot") {
+            if (currentPlayer == 1) {
+                textViewCurrentPlayer.text = getString(R.string.display_current_playerOne) + userName
+            } else {
+                textViewCurrentPlayer.text = getString(R.string.display_current_tttBot)
+            }
+        }
+        if(gameType == "friend") {
+            if (currentPlayer == 1) {
+                textViewCurrentPlayer.text = "Player: " + userName
+            } else {
+                textViewCurrentPlayer.text = "Player: $userName's friend"
+            }
         }
     }
 
@@ -225,14 +250,26 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             highScoreModel.insert(User(0, userName, ((SystemClock.elapsedRealtime() - timer.base) / 1000)))
         }
         if (winner == 2) {
-            textViewCurrentPlayer.text = "TTTBot Wins!"
-            Log.d("WINNER", "PLAYER TWO")
-            highScoreModel.insert(User(0, "TTTbot", (SystemClock.elapsedRealtime() - timer.base) / 1000))
+            if (gameType == "bot") {
+                textViewCurrentPlayer.text = getString(R.string.result_display_tttBot_win)
+                Log.d("WINNER", "PLAYER TWO")
+                highScoreModel.insert(User(0, "TTTbot", (SystemClock.elapsedRealtime() - timer.base) / 1000))
+            } else {
+                textViewCurrentPlayer.text = userName + getString(R.string.result_display_friend_win)
+                Log.d("WINNER", "PLAYER TWO")
+                highScoreModel.insert(
+                    User(
+                        0,
+                        "$userName's friend",
+                        (SystemClock.elapsedRealtime() - timer.base) / 1000
+                    )
+                )
+            }
         }
 
 
         if (winner == 3) {
-            textViewCurrentPlayer.text = "Draw! Try Again"
+            textViewCurrentPlayer.text = getString(R.string.result_display_draw)
             currentPlayer = 1
 
             Log.d("WINNER", "DRAW")

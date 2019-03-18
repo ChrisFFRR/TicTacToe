@@ -1,6 +1,5 @@
 package no.marchand.tictactoe
 
-import no.marchand.tictactoe.fragments.GameScreenFragment
 
 
 class GameBoardModel(private var size: Int = 3) {
@@ -21,7 +20,6 @@ class GameBoardModel(private var size: Int = 3) {
     }
 
     fun determineWinner(): Int {
-
 
             // Horizontal winner
             for (row in 0 until size) {

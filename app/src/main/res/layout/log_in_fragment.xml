@@ -2,17 +2,19 @@
 
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/black">
+        android:background="@android:color/black"
+        android:id="@+id/scrollView2">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="wrap_content"
-                                                 android:layout_gravity="top"
-                                                 android:id="@+id/ConstraintLayout"
-                                                 android:background="@android:color/black">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:id="@+id/ConstraintLayout"
+            android:background="@android:color/black">
 
 
         <ImageView
@@ -38,30 +40,61 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.52"
                 android:hint="@string/player_name_txt_placeholder"
                 android:textColorHint="@color/colorPrimary"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
-
-        <Button
-                android:text="@string/play_btn"
-                android:fontFamily="@font/lazer84"
-                android:textSize="25sp"
-                android:layout_width="166dp"
-                android:layout_height="69dp"
-                android:id="@+id/playBtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/editTextUserName"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+                android:importantForAutofill="no"/>
+
+        <Button
+                android:text="@string/playWBot_btn"
+                android:fontFamily="@font/lazer84"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/playBtn"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+                android:text="@string/play_alone"
+                android:fontFamily="@font/lazer84"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/onePlayerBtn"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:text="@string/game_type_txtView"
+                android:fontFamily="@font/lazer84"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUserName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
