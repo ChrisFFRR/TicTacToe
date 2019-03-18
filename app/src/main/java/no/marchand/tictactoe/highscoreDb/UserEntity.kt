@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Highscore_table")
 
 data class User(
-    @PrimaryKey var id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int,
     @ColumnInfo(name = "name") var user: String?,
     @ColumnInfo(name = "time") var time: Long?
 
