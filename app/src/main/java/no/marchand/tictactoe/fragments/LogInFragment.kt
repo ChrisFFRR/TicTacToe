@@ -27,7 +27,6 @@ class LogInFragment : Fragment() {
         val logInPrefs: SharedPreferences = context!!.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
         val editor = logInPrefs.edit()
 
-        val userNameTxtView: EditText = view.findViewById(R.id.editTextUserName)
         val playBtn: Button = view.findViewById(R.id.playBtn)
 
         playBtn.setOnClickListener {
