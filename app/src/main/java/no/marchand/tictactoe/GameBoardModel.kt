@@ -15,7 +15,7 @@ class GameBoardModel(private var size: Int = 3) {
     }
 
     fun resetBoard() {
-        board.fill(0, 0, board.size - 1)
+        board.fill(0, 0, board.size)
 
 
     }

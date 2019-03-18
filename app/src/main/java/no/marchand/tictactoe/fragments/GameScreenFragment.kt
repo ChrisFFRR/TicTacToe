@@ -30,7 +30,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     var board = GameBoardModel()
     var bot = BotModel(board)
-    //var timesPlayed = GameUtil()
 
     var gameInProgress = false
     private var currentPlayer = 1
@@ -116,7 +115,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
             timesPlayed = 0
-            //timesPlayed.resetTimesPlayed()
             board.resetBoard()
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
@@ -150,7 +148,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
     private fun newGame() {
         timesPlayed = 0
-       // timesPlayed.resetTimesPlayed()
         gameInProgress = true
         currentPlayer = 1
 
@@ -225,6 +222,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
 
     private fun displayWinner(winner: Int) {
+        timesPlayed = 0
+        gameInProgress = false
 
         if (winner == 1) {
             textViewCurrentPlayer.text = "$userName Wins!"
@@ -244,8 +243,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
             Log.d("WINNER", "DRAW")
         }
-        timesPlayed = 0
-      // timesPlayed.resetTimesPlayed()
+
         pauseTimer()
     }
 
