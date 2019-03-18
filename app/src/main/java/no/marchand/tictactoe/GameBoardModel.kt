@@ -45,6 +45,7 @@ class GameBoardModel(private var size: Int = 3) {
                     return readValue(1, 1)
                 }
             }
+
         if(checkForDraw()) {
             return 3
         }
