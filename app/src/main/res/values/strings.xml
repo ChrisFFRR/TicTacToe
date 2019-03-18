@@ -3,7 +3,7 @@
     <string name="play">play</string>
     <string name="pause">pause</string>
     <string name="display_info">display__info</string>
-    <string name="play_btn">PLAY</string>
+    <string name="playWBot_btn">\u0020 play with bot</string>
     <string name="player_name_editTxt">Player Name</string>
     <string name="player_name_txt_placeholder">Player Name</string>
     <string name="logout_btn">logout</string>
@@ -24,6 +24,14 @@
     <string name="b21">b21</string>
     <string name="b02">b02</string>
     <string name="b12">b12</string>
+    <string name="play_alone">\u0020 play alone</string>
+    <string name="game_type_txtView">\u0020 GAME TYPE</string>
+    <string name="result_display_draw">Draw! Try Again</string>
+    <string name="result_display_friend_win">\'s friend Wins!</string>
+    <string name="result_display_tttBot_win">TTTBot Wins!</string>
+    <string name="result_display_playerOne_win">Wins!</string>
+    <string name="display_current_playerOne">Player:</string>
+    <string name="display_current_tttBot">Player: TTTBot</string>
 
 
 </resources>
