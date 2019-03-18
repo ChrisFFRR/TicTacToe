@@ -24,16 +24,15 @@ import no.marchand.tictactoe.highscoreDb.User
 
 private val TAG = "The debugger is saying"
 
+    var timesPlayed = 0
 
 class GameScreenFragment : Fragment(), View.OnClickListener {
 
     var board = GameBoardModel()
     var bot = BotModel(board)
-    var timesPlayed = GameUtil()
 
     var gameInProgress = false
     private var currentPlayer = 1
-    private var highScoreId = 1
 
     private var timerRunning: Boolean = false
     private var timerPauseOffset: Long = 0
@@ -101,7 +100,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         btn08.setOnClickListener(this)
 
         startBtn.setOnClickListener {
-            if ((!timerRunning) && (timesPlayed.timesPlayed == 0) && (!gameInProgress)) {
+            if ((!timerRunning) && (timesPlayed == 0) && (!gameInProgress)) {
                 newGame()
                 startTimer()
             } else {
@@ -115,7 +114,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
         logoutBtn.setOnClickListener {
             loadPrefs.edit().remove("UserName")
             loadPrefs.edit().apply()
-            timesPlayed.resetTimesPlayed()
+            timesPlayed = 0
             board.resetBoard()
             Navigation.findNavController(view).navigate(R.id.logInFragment)
         }
@@ -148,7 +147,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     }
 
     private fun newGame() {
-        timesPlayed.resetTimesPlayed()
+        timesPlayed = 0
         gameInProgress = true
         currentPlayer = 1
 
@@ -166,28 +165,33 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
 
     private fun gameLoop() {
+        timesPlayed++
+        Log.d("times played ", timesPlayed.toString())
+        //timesPlayed.incrementTimesPlayed()
         displayCurrentPlayer()
         reDrawBoard()
         var winner = board.determineWinner()
+
         if (winner != -1) {
             gameInProgress = false
             displayWinner(winner)
         }
+
         if(gameInProgress) {
             if (currentPlayer == 1) {
                 currentPlayer = 2
 
                 bot.randomMove()
-                timesPlayed.incrementTimesPlayed()
+               //timesPlayed.incrementTimesPlayed()
                 gameLoop()
             } else {
                 currentPlayer = 1
                 displayCurrentPlayer()
-                timesPlayed.incrementTimesPlayed()
+               // timesPlayed.incrementTimesPlayed()
             }
         }
 
-        Log.d("times played ", timesPlayed.timesPlayed.toString())
+
     }
 
     private fun reDrawBoard() {
@@ -218,6 +222,8 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
 
     private fun displayWinner(winner: Int) {
+        timesPlayed = 0
+        gameInProgress = false
 
         if (winner == 1) {
             textViewCurrentPlayer.text = "$userName Wins!"
@@ -237,7 +243,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
 
             Log.d("WINNER", "DRAW")
         }
-       timesPlayed.resetTimesPlayed()
+
         pauseTimer()
     }
 
