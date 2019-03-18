@@ -15,7 +15,6 @@ import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.game_screen_fragment.*
 import no.marchand.tictactoe.BotModel
 import no.marchand.tictactoe.GameBoardModel
-import no.marchand.tictactoe.GameUtil
 import no.marchand.tictactoe.R
 import no.marchand.tictactoe.highscoreDb.HighscoreViewModel
 import no.marchand.tictactoe.highscoreDb.User
@@ -167,7 +166,6 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     private fun gameLoop() {
         timesPlayed++
         Log.d("times played ", timesPlayed.toString())
-        //timesPlayed.incrementTimesPlayed()
         displayCurrentPlayer()
         reDrawBoard()
         var winner = board.determineWinner()
@@ -182,16 +180,12 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
                 currentPlayer = 2
 
                 bot.randomMove()
-               //timesPlayed.incrementTimesPlayed()
                 gameLoop()
             } else {
                 currentPlayer = 1
                 displayCurrentPlayer()
-               // timesPlayed.incrementTimesPlayed()
             }
         }
-
-
     }
 
     private fun reDrawBoard() {
