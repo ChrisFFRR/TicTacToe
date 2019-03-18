@@ -50,7 +50,7 @@ class GameScreenFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         loadPrefs = this.context?.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)!!
-        userName = loadPrefs.getString("UserName", null)!!
+        userName = loadPrefs.getString("UserName", "")!!
 
         val view = inflater.inflate(R.layout.game_screen_fragment, container, false)
 

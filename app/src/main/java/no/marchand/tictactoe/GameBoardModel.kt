@@ -33,7 +33,7 @@ class GameBoardModel(private var size: Int = 3) {
             for (col in 0 until size) {
                 if (readValue(col, 0) == readValue(col, 1) && readValue(col, 1) == readValue(col, 2) && ((readValue(col, 0) != 0))
                 ) {
-                    return readValue(0, col)
+                    return readValue(col, 0)
                 }
             }
             // Diagonal winner
